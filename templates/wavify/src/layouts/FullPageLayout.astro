@@ -1,0 +1,56 @@
+---
+import '../global.css';
+import data from '../data.json';
+
+const props = Astro.props;
+let title = 'Site';
+let description = '';
+if (props.seo && props.seo.title) title = props.seo.title;
+if (props.seo && props.seo.description) description = props.seo.description;
+
+const dir = data.metadata.settings.dir || 'ltr';
+const defaultTheme = data.metadata.styles.defaultTheme || 'light';
+---
+
+<html dir={dir}>
+  <head>
+    <title>{title}</title>
+    <meta
+      name="description"
+      content={description}
+    />
+
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<script is:inline define:vars={{ defaultTheme }}>
+  const getThemePreference = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    return defaultTheme;
+  };
+  const isDark = getThemePreference() === 'dark';
+  document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+
+  if (typeof localStorage !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+</script>

@@ -1,0 +1,22 @@
+---
+import FullPageLayout from '../layouts/FullPageLayout.astro';
+import { cn, getPage } from '@/utils';
+import { Page } from '@/types';
+import RenderBackgrounds from '@/components/common/RenderBackgrounds';
+import Wavify404 from "@/components/sections/Wavify404";
+
+
+// Replace with an API request if needed
+const pageId = 'not-found';
+const page = getPage(pageId) as unknown as Page;
+---
+
+<FullPageLayout seo={page.seo}>
+  <main class={cn('relative min-h-screen min-w-min overflow-clip max-w-[140rem] mx-auto', page.containerClasses)}>
+    <RenderBackgrounds backgrounds={page.backgrounds || []} />
+
+    <!-- Page Sections -->
+    <Wavify404 client:load section={page.sections['Wavify404']} />
+
+  </main>
+</FullPageLayout>
