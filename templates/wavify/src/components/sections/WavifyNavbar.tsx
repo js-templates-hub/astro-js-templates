@@ -74,7 +74,7 @@ const WavifyNavbar: FC<SectionProps> = ({ section }) => {
                         buttonClasses={cn(
                           item.button.type === 'button'
                             ? [
-                                'w-full text-center md:w-auto',
+                                'w-full text-center lg:w-auto',
                                 commonElementClasses.button,
                               ]
                             : commonElementClasses.link,

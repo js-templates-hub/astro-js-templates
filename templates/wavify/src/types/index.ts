@@ -128,6 +128,36 @@ export type LinkItem = {
   newTab?: boolean;
 };
 
+export type FeatureElement = {
+  feature: {
+    label: string;
+    value?: string;
+    icon: string;
+  };
+  featureClasses: string;
+  featureAnimation?: Animation;
+};
+export type FeatureItem = {
+  label: string;
+  value?: string;
+  icon: string;
+};
+
+export type PricingCycleElement = {
+  cycle: {
+    amount: string;
+    cycle: string;
+    label: string;
+  };
+  cycleClasses: string;
+  cycleAnimation?: Animation;
+};
+export type PricingCycleItem = {
+  amount: string;
+  cycle: string;
+  label: string;
+};
+
 export type ButtonItem = {
   label: string;
   href: string;
@@ -237,6 +267,18 @@ export type Elements = {
   buttonAnimation?: Animation;
   buttons: ButtonItem[];
   buttonsClasses: string;
+  cycle: PricingCycleItem;
+  cycleClasses: string;
+  cycleAnimation?: Animation;
+  cycles: PricingCycleElement[];
+  cyclesClasses: string;
+  cyclesAnimation?: Animation;
+  feature: FeatureElement;
+  featureClasses: string;
+  featureAnimation?: Animation;
+  features: FeatureElement[];
+  featuresClasses: string;
+  featuresAnimation?: Animation;
   items: Elements[];
   itemsClasses: string;
   itemsBackgrounds: any[];

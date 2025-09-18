@@ -1,0 +1,26 @@
+---
+import FullPageLayout from '../layouts/FullPageLayout.astro';
+import { cn, getPage } from '@/utils';
+import { Page } from '@/types';
+import RenderBackgrounds from '@/components/common/RenderBackgrounds';
+import WavifyNavbar from "@/components/sections/WavifyNavbar";
+import WavifyAccordion from "@/components/sections/WavifyAccordion";
+import WavifyFooter from "@/components/sections/WavifyFooter";
+
+
+// Replace with an API request if needed
+const pageId = 'faq';
+const page = getPage(pageId) as unknown as Page;
+---
+
+<FullPageLayout seo={page.seo}>
+  <main class={cn('relative min-h-screen min-w-min overflow-clip max-w-[140rem] mx-auto', page.containerClasses)}>
+    <RenderBackgrounds backgrounds={page.backgrounds || []} />
+
+    <!-- Page Sections -->
+    <WavifyNavbar client:load section={page.sections['WavifyNavbar']} />
+<WavifyAccordion client:load section={page.sections['WavifyAccordion']} />
+<WavifyFooter client:load section={page.sections['WavifyFooter']} />
+
+  </main>
+</FullPageLayout>
